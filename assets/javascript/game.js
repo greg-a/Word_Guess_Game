@@ -14,23 +14,26 @@ var computerAnswer = answers[Math.floor(Math.random() * answers.length)];
 document.onkeyup = function(event) {
 
     var userGuess = event.key.toLowerCase(); 
+    var correctAnswer = [];
 
     function checkGuess(letter) {
         return letter !== userGuess;
     }
 
+    for (var i = 0; i < computerAnswer.length; i++) {
+        correctAnswer.push(computerAnswer[i]);
+    }
+
     if (lettersGuessed.every(checkGuess)) {
 
-        if (userGuess === computerAnswer) {
-            wins++;
-            guessesRemaining = 10;
-            guesses.length = 0;
-            computerAnswer = options[Math.floor(Math.random() * options.length)];
+        if (correctAnswer.every(checkGuess) === false) {
+            alert("Correct Guess!");
+            lettersGuessed.push(userGuess);
         }
         else {
             if (guessesRemaining > 1) {
                 guessesRemaining--;
-                lettersGuessed.push(lettersGuessed);
+                lettersGuessed.push(userGuess);
             }
             else {
                 lettersGuessed.length = 0;
@@ -42,7 +45,8 @@ document.onkeyup = function(event) {
     
     console.log("Answer: " + computerAnswer);
     console.log("Letters guessed: " + lettersGuessed);
-
+    console.log("Correct Answer: " + correctAnswer);
+    console.log("Guesses Remaining: " + guessesRemaining);
 
 }
 
