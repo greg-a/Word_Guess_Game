@@ -7,11 +7,19 @@ var correctGuesses = [];
 var incorrectGuesses = [];
 var answers = ["the process", "trust the process", "sam hinkie", "joel embiid", "ben simmons"];
 var guessesRemaining = 10;
-var computerAnswer = answers[Math.floor(Math.random() * answers.length)];
+// var computerAnswer = answers[Math.floor(Math.random() * answers.length)];
 var blankAnswer = "";
 var correctAnswer = [];
 
 function newAnswer() {
+
+    correctGuesses.length = 0;
+    incorrectGuesses.length = 0;
+    correctAnswer.length = 0;
+    blankAnswer = "";
+    guessesRemaining = 10;
+    computerAnswer = answers[Math.floor(Math.random() * answers.length)];
+
     for (var i = 0; i < computerAnswer.length; i++) {
         computerAnswer = computerAnswer.replace(/\s+/g, '');
         correctAnswer.push(computerAnswer[i]);        
@@ -30,12 +38,10 @@ function fillBlank() {
             blankAnswer += "_ ";
         }
     }
-}
-
-
- 
+} 
 
 document.onkeyup = function(event) {
+
 
     var userGuess = event.key.toLowerCase(); 
     
@@ -44,42 +50,39 @@ document.onkeyup = function(event) {
     function checkGuess(letter) {
         return letter !== userGuess;
     }
-
     
     if (correctAnswer.length === 0) {
         newAnswer();
         document.getElementById("blank-answer").innerHTML = blankAnswer;
     }
 
-    if (incorrectGuesses.every(checkGuess) && (correctGuesses.every(checkGuess))) {
+    if (incorrectGuesses.every(checkGuess) && (correctGuesses.every(checkGuess))) {        
 
-        if (correctAnswer.every(checkGuess) === false) {
-            alert("Correct Guess! ");
+        if (correctAnswer.every(checkGuess) === false) {            
             correctGuesses.push(userGuess);
             fillBlank(correctGuesses);
             document.getElementById("blank-answer").innerHTML = blankAnswer;
+
+            if (blankAnswer === computerAnswer) {
+                alert("You Won!!");
+                newAnswer();
+            }
         }
-        
+    
+        else if (guessesRemaining > 1) {
+            guessesRemaining--;
+            incorrectGuesses.push(userGuess);
+        } 
         else {
-            if (guessesRemaining > 1) {
-                guessesRemaining--;
-                incorrectGuesses.push(userGuess);
-            }
-            else {
-                correctGuesses.length = 0;
-                incorrectGuesses.length = 0;
-                correctAnswer.length = 0;
-                blankAnswer = "";
-                guessesRemaining = 10;                
-            }
-        }  
+            newAnswer();             
+        } 
     }
       
-    console.log("Answer: " + computerAnswer);
+    console.log("Answer: " + correctAnswer);
     document.getElementById("wrong-guess").innerHTML = "Wrong guesses: " + incorrectGuesses;
     console.log("Wrong Guesses: " + incorrectGuesses);
     console.log("Correct Answer: " + correctAnswer);
-    console.log("Guesses Remaining: " + guessesRemaining);
+    document.getElementById("guesses-left").innerHTML = guessesRemaining;
 
 }
 

@@ -1,0 +1,32 @@
+body {
+    font-family: font-family: 'PT Sans', sans-serif;
+}
+
+.jumbotron {
+    background-image: url("../images/background2.jpg");
+    /* background-size: 645px 250px; */
+    background-size: 50% 102%;
+    color: white;
+    text-align: center;
+    height: 245px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.container {
+    background-image: url(../images/sub-background2.png);
+    opacity: 0.7;
+    border-radius: 10px;
+    width: 235px;
+    height: 245px;
+    margin-top: -67px;
+    padding: 10px;
+    color: rgb(230, 207, 207);
+}
+
+.lead {
+    color: #d30f40;
+}
+
+.badg-danger {
+    height: 30px;
+}
