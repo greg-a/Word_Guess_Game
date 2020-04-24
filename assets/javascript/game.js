@@ -7,9 +7,18 @@ var correctGuesses = [];
 var incorrectGuesses = [];
 var answers = ["the process", "trust the process", "sam hinkie", "joel embiid", "ben simmons"];
 var guessesRemaining = 10;
-// var computerAnswer = answers[Math.floor(Math.random() * answers.length)];
 var blankAnswer = "";
 var correctAnswer = [];
+var sadPic = document.createElement("img");
+var victoryPic = document.createElement("img");
+
+sadPic.src = "assets/images/jah-sad.jpg";
+
+victoryPic.src = "assets/gifs/mjjump.gif";
+
+victoryPic.setAttribute("class", "image");
+
+sadPic.setAttribute("class", "image");
 
 function newAnswer() {
 
@@ -24,6 +33,7 @@ function newAnswer() {
         computerAnswer = computerAnswer.replace(/\s+/g, '');
         correctAnswer.push(computerAnswer[i]);        
         blankAnswer += "_ ";
+        document.getElementById("blank-answer").innerHTML = blankAnswer;
     }
 }
 
@@ -53,10 +63,10 @@ document.onkeyup = function(event) {
     
     if (correctAnswer.length === 0) {
         newAnswer();
+        document.querySelector(".image").remove();
         document.getElementById("blank-answer").innerHTML = blankAnswer;
     }
-
-    if (incorrectGuesses.every(checkGuess) && (correctGuesses.every(checkGuess))) {        
+    else if (incorrectGuesses.every(checkGuess) && (correctGuesses.every(checkGuess))) {        
 
         if (correctAnswer.every(checkGuess) === false) {            
             correctGuesses.push(userGuess);
@@ -64,24 +74,27 @@ document.onkeyup = function(event) {
             document.getElementById("blank-answer").innerHTML = blankAnswer;
 
             if (blankAnswer === computerAnswer) {
-                alert("You Won!!");
-                newAnswer();
+                correctAnswer.length = 0;
+                document.getElementById("sixer-pics").appendChild(victoryPic);
+                document.getElementById("blank-answer").innerHTML = "Press any button to start";
             }
+          
         }
-    
         else if (guessesRemaining > 1) {
             guessesRemaining--;
             incorrectGuesses.push(userGuess);
         } 
         else {
-            newAnswer();             
+            guessesRemaining = 0;
+            correctAnswer.length = 0;
+            document.getElementById("sixer-pics").appendChild(sadPic); 
+            document.getElementById("blank-answer").innerHTML = "Press any button to start"            
         } 
+    
+        
     }
-      
-    console.log("Answer: " + correctAnswer);
-    document.getElementById("wrong-guess").innerHTML = "Wrong guesses: " + incorrectGuesses;
-    console.log("Wrong Guesses: " + incorrectGuesses);
-    console.log("Correct Answer: " + correctAnswer);
+    
+    document.getElementById("letters-guessed").innerHTML = incorrectGuesses;
     document.getElementById("guesses-left").innerHTML = guessesRemaining;
 
 }
