@@ -1,11 +1,7 @@
-// press any key to start
-
-// push correct guesses to blankAnswer
-
 var wins = 0;
 var correctGuesses = [];
 var incorrectGuesses = [];
-var answers = ["the process", "trust the process", "sam hinkie", "joel embiid", "ben simmons"];
+var answers = ["robert covington", "tj mcconnell", "sam hinkie", "joel embiid", "ben simmons", "markelle fultz", "isaiah canaan", "jerami grant", "tony wroten", "mike scott", "brett brown"];
 var guessesRemaining = 10;
 var blankAnswer = "";
 var correctAnswer = [];
