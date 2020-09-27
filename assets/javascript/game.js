@@ -46,11 +46,10 @@ function fillBlank() {
     }
 } 
 
-document.onkeydown = function(event) {
+document.onkeyup = function(event) {
 
-    var userGuess = event.key.toLowerCase(); 
-    
-    
+    var mobileGuess = document.getElementById("mobile-input").value;
+    var userGuess = mobileGuess ? mobileGuess : event.key.toLowerCase();     
 
     function checkGuess(letter) {
         return letter !== userGuess;
@@ -58,7 +57,7 @@ document.onkeydown = function(event) {
     
     if (correctAnswer.length === 0) {
         newAnswer();
-        document.querySelector(".image").remove();
+        // document.querySelector(".image").remove();
         document.getElementById("blank-answer").innerHTML = blankAnswer;
     }
     else if (incorrectGuesses.every(checkGuess) && (correctGuesses.every(checkGuess))) {        
@@ -89,6 +88,7 @@ document.onkeydown = function(event) {
         
     }
     
+    document.getElementById("mobile-input").value = "";
     document.getElementById("letters-guessed").innerHTML = incorrectGuesses;
     document.getElementById("guesses-left").innerHTML = guessesRemaining;
 
