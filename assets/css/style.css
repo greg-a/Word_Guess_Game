@@ -100,6 +100,15 @@ body {
     width: 200px;
 }
 
+#mobile-input-badge {
+    display: none;
+}
+
+#mobile-input {
+    width:30%;
+    margin-top: 15px;
+}
+
 #sixer-pics {
     margin-right: 135px;
     padding-top: 3px;
@@ -129,5 +138,9 @@ body {
     .image {
         width: 150%;
         height:150%;
+    }
+
+    #mobile-input-badge {
+        display: block;
     }
 }

@@ -46,8 +46,7 @@ function fillBlank() {
     }
 } 
 
-document.onkeyup = function(event) {
-
+document.onkeydown = function(event) {
 
     var userGuess = event.key.toLowerCase(); 
     
